@@ -12,6 +12,7 @@ public abstract class Fetch {
 
 	protected String input = null;
 	protected String urlS = null;
+	protected Object res;
 	
 	public volatile boolean conn_error = false; // "Unable to fetch the data. Check your internet connection."
 	
@@ -47,7 +48,7 @@ public abstract class Fetch {
 					
 					String data = s.hasNext() ? s.next() : "";
 					
-					parseJSON(data);
+					res = parseJSON(data);
 					
 					stream.close();
 					stillParsing=false;
@@ -62,5 +63,9 @@ public abstract class Fetch {
 			
 		});
 		t.start();
+	}
+	
+	public Object getDataObject(){
+		return res;
 	}
 }
